@@ -1,52 +1,69 @@
-"use client"
+"use client";
 
-import { useState, useRef, type FormEvent } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { BrainCircuit, Clock, Cpu, Eye, Github, Linkedin, Mail, Rss, Twitter } from "lucide-react"
-import { useToast } from "@/components/ui/use-toast"
+import { useState, useRef, type FormEvent } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  BrainCircuit,
+  Clock,
+  Cpu,
+  Eye,
+  Github,
+  Linkedin,
+  Mail,
+  Rss,
+  Twitter,
+} from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Home() {
-  const [email, setEmail] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
-  const newsletterRef = useRef<HTMLElement>(null)
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+  const newsletterRef = useRef<HTMLElement>(null);
 
   const scrollToNewsletter = () => {
-    newsletterRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    newsletterRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleSubscribe = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!email || !email.includes("@")) {
       toast({
         title: "Invalid email",
         description: "Please enter a valid email address.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     // Simulate subscription process
     setTimeout(() => {
       toast({
         title: "Subscription successful!",
         description: "Thank you for subscribing to our newsletter.",
-      })
-      setEmail("")
-      setIsSubmitting(false)
-    }, 1000)
+      });
+      setEmail("");
+      setIsSubmitting(false);
+    }, 1000);
 
     // For GitHub Pages, you could use a service like Formspree or a Google Form
     // to collect emails without needing a backend
     // Example: window.open(`https://formspree.io/f/yourformid?email=${encodeURIComponent(email)}`, '_blank')
-  }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -56,16 +73,28 @@ export default function Home() {
             Neural<span className="text-purple-500">Pulse</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm">
-            <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+            <Link
+              href="/"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
               Home
             </Link>
-            <Link href="/articles/" className="text-gray-400 hover:text-white transition-colors">
+            <Link
+              href="/articles/"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
               Articles
             </Link>
-            <Link href="/topics/" className="text-gray-400 hover:text-white transition-colors">
+            <Link
+              href="/topics/"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
               Topics
             </Link>
-            <Link href="/about/" className="text-gray-400 hover:text-white transition-colors">
+            <Link
+              href="/about/"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
               About
             </Link>
           </nav>
@@ -84,16 +113,22 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                Exploring the Frontiers of <span className="text-purple-500">Artificial Intelligence</span>
+                Exploring the Frontiers of{" "}
+                <span className="text-purple-500">Artificial Intelligence</span>
               </h1>
               <p className="text-gray-400 text-lg md:text-xl">
-                Deep insights into AI, GenAI, Computer Vision, and Deep Learning advancements.
+                Deep insights into AI, GenAI, Computer Vision, and Deep Learning
+                advancements.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="bg-purple-600 hover:bg-purple-700">
                   <Link href="/articles/">Latest Articles</Link>
                 </Button>
-                <Button variant="outline" className="border-gray-700 hover:bg-gray-900" onClick={scrollToNewsletter}>
+                <Button
+                  variant="outline"
+                  className="border-gray-700 hover:bg-gray-900"
+                  onClick={scrollToNewsletter}
+                >
                   Join Newsletter
                 </Button>
               </div>
@@ -114,7 +149,10 @@ export default function Home() {
         <section className="mb-20">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold">Featured Articles</h2>
-            <Link href="/articles/" className="text-purple-500 hover:text-purple-400 text-sm flex items-center gap-2">
+            <Link
+              href="/articles/"
+              className="text-purple-500 hover:text-purple-400 text-sm flex items-center gap-2"
+            >
               View all <Eye className="h-4 w-4" />
             </Link>
           </div>
@@ -204,13 +242,17 @@ export default function Home() {
           </div>
         </section>
 
-        <section ref={newsletterRef} id="newsletter" className="bg-gray-900 rounded-xl p-8 mb-20">
+        <section
+          ref={newsletterRef}
+          id="newsletter"
+          className="bg-gray-900 rounded-xl p-8 mb-20"
+        >
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-4">
               <h2 className="text-2xl font-bold">Stay Updated</h2>
               <p className="text-gray-400">
-                Subscribe to our newsletter to receive the latest insights on AI advancements, tutorials, and industry
-                news.
+                Subscribe to our newsletter to receive the latest insights on AI
+                advancements, tutorials, and industry news.
               </p>
             </div>
             <form onSubmit={handleSubscribe} className="flex gap-2">
@@ -242,7 +284,8 @@ export default function Home() {
                 Neural<span className="text-purple-500">Pulse</span>
               </Link>
               <p className="text-gray-400 text-sm">
-                Exploring the cutting edge of artificial intelligence and machine learning.
+                Exploring the cutting edge of artificial intelligence and
+                machine learning.
               </p>
               <div className="flex space-x-4">
                 <Link href="#" className="text-gray-400 hover:text-white">
@@ -330,19 +373,34 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-6 text-sm text-gray-400">
-            <p>© {new Date().getFullYear()} NeuralPulse. All rights reserved.</p>
+            <p>
+              © {new Date().getFullYear()} NeuralPulse. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-function FeaturedCard({ title, description, image, date, category, icon, slug = "" }) {
+function FeaturedCard({
+  title,
+  description,
+  image,
+  date,
+  category,
+  icon,
+  slug = "",
+}: any) {
   return (
     <Card className="bg-gray-900 border-gray-800 overflow-hidden hover:border-purple-500/50 transition-colors">
       <div className="relative h-48">
-        <Image src={image || "/placeholder.svg"} alt={title} fill className="object-cover" />
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover"
+        />
       </div>
       <CardHeader>
         <div className="flex items-center gap-2 text-sm text-purple-500 mb-2">
@@ -352,35 +410,56 @@ function FeaturedCard({ title, description, image, date, category, icon, slug = 
         <CardTitle className="text-xl">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription className="text-gray-400">{description}</CardDescription>
+        <CardDescription className="text-gray-400">
+          {description}
+        </CardDescription>
       </CardContent>
       <CardFooter className="flex justify-between text-sm text-gray-500">
         <div className="flex items-center gap-1">
           <Clock className="h-4 w-4" />
           <span>{date}</span>
         </div>
-        <Link href={`/blog/${slug}/`} className="text-purple-500 hover:text-purple-400">
+        <Link
+          href={`/blog/${slug}/`}
+          className="text-purple-500 hover:text-purple-400"
+        >
           Read more →
         </Link>
       </CardFooter>
     </Card>
-  )
+  );
 }
 
-function ArticleCard({ title, description, category, date, slug = "", image }) {
+function ArticleCard({
+  title,
+  description,
+  category,
+  date,
+  slug = "",
+  image,
+}: any) {
   return (
     <Link href={`/blog/${slug}/`} className="group">
       <div className="space-y-3">
         <div className="relative h-48 rounded-lg overflow-hidden border border-gray-800 group-hover:border-purple-500/50 transition-colors">
-          <Image src={image || "/placeholder.svg"} alt={`${title} thumbnail`} fill className="object-cover" />
+          <Image
+            src={image || "/placeholder.svg"}
+            alt={`${title} thumbnail`}
+            fill
+            className="object-cover"
+          />
         </div>
         <div>
           <div className="flex items-center gap-2 text-xs text-purple-500 mb-2">
             <BrainCircuit className="h-4 w-4" />
             <span>{category}</span>
           </div>
-          <h3 className="font-medium group-hover:text-purple-400 transition-colors">{title}</h3>
-          <p className="text-gray-400 text-sm mt-2 line-clamp-2">{description}</p>
+          <h3 className="font-medium group-hover:text-purple-400 transition-colors">
+            {title}
+          </h3>
+          <p className="text-gray-400 text-sm mt-2 line-clamp-2">
+            {description}
+          </p>
           <div className="flex items-center gap-1 mt-3 text-xs text-gray-500">
             <Clock className="h-3 w-3" />
             <span>{date}</span>
@@ -388,5 +467,5 @@ function ArticleCard({ title, description, category, date, slug = "", image }) {
         </div>
       </div>
     </Link>
-  )
+  );
 }
