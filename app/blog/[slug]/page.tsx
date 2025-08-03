@@ -1,21 +1,47 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowLeft, BrainCircuit, Clock, Share2, Twitter, Facebook, Linkedin } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/components/ui/use-toast"
-import { useEffect } from "react"
+import Link from "next/link";
+import Image from "next/image";
+import {
+  ArrowLeft,
+  BrainCircuit,
+  Clock,
+  Share2,
+  Twitter,
+  Facebook,
+  Linkedin,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { useEffect } from "react";
 
 // This is a static mapping of blog posts for GitHub Pages
-const blogPosts = {
+const blogPosts: {
+  [key: string]: {
+    title: string;
+    date: string;
+    author: string;
+    category: string;
+    readTime: string;
+    image: string;
+    content: string;
+    relatedPosts: {
+      title: string;
+      category: string;
+      image: string;
+      slug: string;
+    }[];
+  };
+} = {
   "evolution-of-gans": {
-    title: "The Evolution of Generative Adversarial Networks: From GAN to StyleGAN-3",
+    title:
+      "The Evolution of Generative Adversarial Networks: From GAN to StyleGAN-3",
     date: "May 15, 2023",
     author: "Dr. Alex Chen",
     category: "GenAI",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1617791160505-6f00504e3519?q=80&w=2000&h=1000&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1617791160505-6f00504e3519?q=80&w=2000&h=1000&auto=format&fit=crop",
     content: `
       <p>Generative Adversarial Networks (GANs) have revolutionized the field of artificial intelligence since their introduction by Ian Goodfellow and his colleagues in 2014. These networks consist of two neural networks—a generator and a discriminator—that are trained simultaneously through adversarial training.</p>
       
@@ -82,15 +108,18 @@ const blogPosts = {
     `,
     relatedPosts: [
       {
-        title: "The Rise of Multimodal AI Models: Bridging Text, Image, and Beyond",
+        title:
+          "The Rise of Multimodal AI Models: Bridging Text, Image, and Beyond",
         category: "AI Research",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "multimodal-ai-models",
       },
       {
         title: "AI in 2025: Transforming Daily Life",
         category: "Future Tech",
-        image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "ai-in-2025",
       },
     ],
@@ -101,7 +130,8 @@ const blogPosts = {
     author: "Dr. Michael Zhang",
     category: "AI Research",
     readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&h=1000&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&h=1000&auto=format&fit=crop",
     content: `
       <p>Artificial intelligence has undergone a remarkable evolution in recent years, with one of the most significant developments being the rise of multimodal AI models. These sophisticated systems can process, understand, and generate content across multiple types of data—or modalities—such as text, images, audio, and video.</p>
       
@@ -149,15 +179,18 @@ const blogPosts = {
     `,
     relatedPosts: [
       {
-        title: "The Evolution of Generative Adversarial Networks: From GAN to StyleGAN-3",
+        title:
+          "The Evolution of Generative Adversarial Networks: From GAN to StyleGAN-3",
         category: "GenAI",
-        image: "https://images.unsplash.com/photo-1617791160505-6f00504e3519?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1617791160505-6f00504e3519?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "evolution-of-gans",
       },
       {
         title: "Deep Learning for Natural Language Processing",
         category: "NLP",
-        image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "deep-learning-nlp",
       },
     ],
@@ -168,7 +201,8 @@ const blogPosts = {
     author: "Dr. Sarah Johnson",
     category: "Future Tech",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=2000&h=1000&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=2000&h=1000&auto=format&fit=crop",
     content: `
       <p>As we approach 2025, artificial intelligence has become deeply integrated into our daily lives in ways that were once the realm of science fiction. From personal assistants that anticipate our needs to AI systems that help us make better decisions, the technology has transformed how we live, work, and interact with the world around us.</p>
       
@@ -198,13 +232,15 @@ const blogPosts = {
       {
         title: "The Future of AI Research: What's Next?",
         category: "Future of AI",
-        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "future-of-ai-research",
       },
       {
         title: "Ethical Considerations in Generative AI",
         category: "AI Ethics",
-        image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "ethical-considerations-genai",
       },
     ],
@@ -215,7 +251,8 @@ const blogPosts = {
     author: "Dr. Lisa Park",
     category: "NLP",
     readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2000&h=1000&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2000&h=1000&auto=format&fit=crop",
     content: `
       <p>Natural Language Processing (NLP) has undergone a revolutionary transformation in recent years, driven largely by advances in deep learning. These powerful neural network approaches have dramatically improved machines' ability to understand, generate, and interact with human language.</p>
       
@@ -250,15 +287,18 @@ const blogPosts = {
     `,
     relatedPosts: [
       {
-        title: "The Rise of Multimodal AI Models: Bridging Text, Image, and Beyond",
+        title:
+          "The Rise of Multimodal AI Models: Bridging Text, Image, and Beyond",
         category: "AI Research",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "multimodal-ai-models",
       },
       {
         title: "Ethical Considerations in Generative AI",
         category: "AI Ethics",
-        image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "ethical-considerations-genai",
       },
     ],
@@ -269,7 +309,8 @@ const blogPosts = {
     author: "Dr. Thomas Anderson",
     category: "Future of AI",
     readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2000&h=1000&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2000&h=1000&auto=format&fit=crop",
     content: `
       <p>Artificial intelligence has advanced at a breathtaking pace in recent years, with breakthroughs in areas like large language models, diffusion-based image generation, and multimodal systems transforming what we thought possible. As we look to the future of AI research, several promising directions are emerging.</p>
       
@@ -304,13 +345,15 @@ const blogPosts = {
       {
         title: "Ethical Considerations in Generative AI",
         category: "AI Ethics",
-        image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "ethical-considerations-genai",
       },
       {
         title: "AI in 2025: Transforming Daily Life",
         category: "Future Tech",
-        image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "ai-in-2025",
       },
     ],
@@ -321,7 +364,8 @@ const blogPosts = {
     author: "Dr. Maya Patel",
     category: "AI Ethics",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=2000&h=1000&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=2000&h=1000&auto=format&fit=crop",
     content: `
       <p>Generative AI has emerged as one of the most transformative technologies of our time, capable of creating text, images, audio, video, and code that increasingly resembles human-created content. While these capabilities offer tremendous potential, they also raise profound ethical questions.</p>
       
@@ -352,24 +396,28 @@ const blogPosts = {
       {
         title: "The Future of AI Research: What's Next?",
         category: "Future of AI",
-        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "future-of-ai-research",
       },
       {
         title: "Deep Learning for Natural Language Processing",
         category: "NLP",
-        image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "deep-learning-nlp",
       },
     ],
   },
   "ai-regulation-landscape-2025": {
-    title: "AI Regulation Landscape in 2025: Global Policies and Industry Impact",
+    title:
+      "AI Regulation Landscape in 2025: Global Policies and Industry Impact",
     date: "March 1, 2025",
     author: "Dr. Elena Kowalski",
     category: "AI Policy",
     readTime: "11 min read",
-    image: "https://images.unsplash.com/photo-1589254065909-b7086229d08c?q=80&w=2000&h=1000&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1589254065909-b7086229d08c?q=80&w=2000&h=1000&auto=format&fit=crop",
     content: `
       <p>The regulatory landscape for artificial intelligence has evolved dramatically over the past few years, as governments and international bodies have worked to establish frameworks that balance innovation with safety, privacy, and ethical considerations.</p>
       
@@ -400,22 +448,28 @@ const blogPosts = {
       {
         title: "Ethical Considerations in Generative AI",
         category: "AI Ethics",
-        image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "ethical-considerations-genai",
       },
       {
         title: "The Future of AI Research: What's Next?",
         category: "Future of AI",
-        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&h=400&auto=format&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600&h=400&auto=format&fit=crop",
         slug: "future-of-ai-research",
       },
     ],
   },
-}
+};
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const { toast } = useToast()
-  const post = blogPosts[params.slug]
+export default function BlogPost({
+  params,
+}: {
+  params: { slug: string | number | any };
+}) {
+  const { toast } = useToast();
+  const post = blogPosts[params.slug as keyof typeof blogPosts];
 
   useEffect(() => {
     if (!post) {
@@ -423,54 +477,62 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
         title: "Post not found",
         description: "The requested blog post could not be found.",
         variant: "destructive",
-      })
+      });
     }
-  }, [post, toast])
+  }, [post, toast]);
 
   if (!post) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Post Not Found</h1>
-          <p className="mb-6">The blog post you're looking for doesn't exist or has been moved.</p>
+          <p className="mb-6">
+            The blog post you're looking for doesn't exist or has been moved.
+          </p>
           <Button asChild>
             <Link href="/">Return Home</Link>
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
   const handleShare = (platform: string) => {
-    const url = window.location.href
-    const text = `Check out this article: ${post.title}`
+    const url = window.location.href;
+    const text = `Check out this article: ${post.title}`;
 
-    let shareUrl = ""
+    let shareUrl = "";
 
     switch (platform) {
       case "twitter":
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
-        break
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+          url
+        )}&text=${encodeURIComponent(text)}`;
+        break;
       case "facebook":
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
-        break
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+          url
+        )}`;
+        break;
       case "linkedin":
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
-        break
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+          url
+        )}`;
+        break;
       default:
         // Copy to clipboard
-        navigator.clipboard.writeText(url)
+        navigator.clipboard.writeText(url);
         toast({
           title: "Link copied",
           description: "The article link has been copied to your clipboard.",
-        })
-        return
+        });
+        return;
     }
 
     if (shareUrl) {
-      window.open(shareUrl, "_blank")
+      window.open(shareUrl, "_blank");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -483,9 +545,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             variant="outline"
             className="border-purple-500 text-purple-500 hover:bg-purple-950 hover:text-white"
             onClick={() => {
-              const newsletterSection = document.getElementById("newsletter")
+              const newsletterSection = document.getElementById("newsletter");
               if (newsletterSection) {
-                newsletterSection.scrollIntoView({ behavior: "smooth" })
+                newsletterSection.scrollIntoView({ behavior: "smooth" });
               }
             }}
           >
@@ -496,7 +558,10 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
 
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
-          <Link href="/articles/" className="inline-flex items-center text-gray-400 hover:text-white mb-8">
+          <Link
+            href="/articles/"
+            className="inline-flex items-center text-gray-400 hover:text-white mb-8"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to articles
           </Link>
@@ -506,7 +571,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             <span>{post.category}</span>
           </div>
 
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">{post.title}</h1>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+            {post.title}
+          </h1>
 
           <div className="flex items-center gap-4 text-sm text-gray-400 mb-8">
             <div className="flex items-center gap-1">
@@ -576,7 +643,11 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             <h3 className="text-xl font-bold mb-6">Related Articles</h3>
             <div className="grid md:grid-cols-2 gap-6">
               {post.relatedPosts.map((relatedPost, index) => (
-                <Link href={`/blog/${relatedPost.slug}/`} className="group" key={index}>
+                <Link
+                  href={`/blog/${relatedPost.slug}/`}
+                  className="group"
+                  key={index}
+                >
                   <div className="space-y-3">
                     <div className="relative h-48 rounded-lg overflow-hidden border border-gray-800 group-hover:border-purple-500/50 transition-colors">
                       <Image
@@ -591,7 +662,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                         <BrainCircuit className="h-4 w-4" />
                         <span>{relatedPost.category}</span>
                       </div>
-                      <h3 className="font-medium group-hover:text-purple-400 transition-colors">{relatedPost.title}</h3>
+                      <h3 className="font-medium group-hover:text-purple-400 transition-colors">
+                        {relatedPost.title}
+                      </h3>
                     </div>
                   </div>
                 </Link>
@@ -608,7 +681,8 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
               Neural<span className="text-purple-500">Pulse</span>
             </Link>
             <p className="text-gray-400 text-sm mt-4 mb-6">
-              Exploring the cutting edge of artificial intelligence and machine learning.
+              Exploring the cutting edge of artificial intelligence and machine
+              learning.
             </p>
             <div className="flex justify-center space-x-4">
               <Link href="#" className="text-gray-400 hover:text-white">
@@ -622,11 +696,13 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
               </Link>
             </div>
             <div className="border-t border-gray-800 mt-8 pt-6 text-sm text-gray-400">
-              <p>© {new Date().getFullYear()} NeuralPulse. All rights reserved.</p>
+              <p>
+                © {new Date().getFullYear()} NeuralPulse. All rights reserved.
+              </p>
             </div>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
